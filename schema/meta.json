@@ -1,0 +1,10 @@
+{
+  "description": "Account API",
+    "id": "account-api",
+    "links": [{
+      "href": "https://accounts.ourapi.com",
+      "rel": "self"
+    }],
+    "title": "Accounts"
+}
+
