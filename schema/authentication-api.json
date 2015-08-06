@@ -1,0 +1,387 @@
+{
+  "$schema": "http://interagent.github.io/interagent-hyper-schema",
+  "type": [
+    "object"
+  ],
+  "definitions": {
+    "account": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Authentication API - Account",
+      "description": "The Account Schema",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of account",
+          "readOnly": true,
+          "format": "uuid",
+          "type": [
+            "string"
+          ]
+        },
+        "email": {
+          "description": "unique email of account",
+          "readOnly": true,
+          "type": [
+            "string"
+          ],
+          "example": "fred@bedrockisp.com"
+        },
+        "token": {
+          "type": [
+            "string"
+          ],
+          "description": "The JWT",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJkYXRhIjp7ImlkIjoiMTE0MzYiLCJ0eXBlIjoiYWNjb3VudHMiLCJhdHRyaWJ1dGVzIjp7ImVtYWlsIjoiZ2xlbm4uZ29vZHJpY2hAZ21haWwuY29tIn19LCJzdWIiOiJhY2NvdW50IiwiZXhwIjoxNDM3MjM0OTM0LCJpc3MiOiJVbmlxdWUgVVNBIiwiaWF0IjoxNDM3MTQ4NTM0LCJqdGkiOiI3ZmJiYTgzOS1kMGRiLTQwODItOTBmZC1kNmMwM2YwN2NmMWMifQ.SuAAhWPz_7VfJ2iyQpPEHjAnj_aZ-0-gI4uptFucWWflQnrYJl3Z17vAjypiQB_6io85Nuw7VK0Kz2_VHc7VHZwAjxMpzSvigzpUS4HHjSsDil8iYocVEFlnJWERooCOCjSB9R150Pje1DKB8fNeePUGbkCDH6QSk2BsBzT07yT-7zrTJ7kRlsJ-3Kw2GDnvSbb_k2ecX_rkeMeaMj3FmF3PDBNlkM"
+        },
+        "identity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/account/definitions/id"
+            }
+          ]
+        },
+        "created_at": {
+          "description": "when account was created",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        },
+        "updated_at": {
+          "description": "when account was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "links": [
+        {
+          "description": "Create a new account.",
+          "href": "/account",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "account": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "email": {
+                    "$ref": "#/definitions/account/definitions/email"
+                  },
+                  "password": {
+                    "type": [
+                      "string"
+                    ],
+                    "description": "The password"
+                  },
+                  "remember_me": {
+                    "type": [
+                      "boolean"
+                    ],
+                    "description": "True/false - generate refresh token (optional)"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Create",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "token": {
+                "$ref": "#/definitions/account/definitions/token"
+              }
+            }
+          }
+        },
+        {
+          "description": "Sign in (generate token)",
+          "href": "/account/session",
+          "method": "POST",
+          "rel": "",
+          "schema": {
+            "properties": {
+              "account": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "email": {
+                    "$ref": "#/definitions/account/definitions/email"
+                  },
+                  "password": {
+                    "type": [
+                      "string"
+                    ],
+                    "description": "The password"
+                  },
+                  "remember_me": {
+                    "type": [
+                      "boolean"
+                    ],
+                    "description": "True/false - generate refresh token (optional)"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            },
+            "type": [
+              "object"
+            ]
+          },
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "token": {
+                "$ref": "#/definitions/account/definitions/token"
+              }
+            }
+          },
+          "title": "Sign In"
+        },
+        {
+          "description": "Update the session with a new token",
+          "href": "/account/session",
+          "method": "PUT",
+          "rel": "update",
+          "title": "Get new token",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "account": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "refresh_token": {
+                    "type": [
+                      "string"
+                    ],
+                    "description": "The refresh token"
+                  },
+                  "remember_me": {
+                    "type": [
+                      "boolean"
+                    ],
+                    "description": "True/false - generate refresh token (optional)"
+                  }
+                },
+                "required": [
+                  "refresh_token"
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "token": {
+                "$ref": "#/definitions/account/definitions/token"
+              }
+            }
+          }
+        },
+        {
+          "description": "Delete the session (logout)",
+          "href": "/account/session",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "Delete all tokens"
+        },
+        {
+          "description": "Info for existing account.",
+          "href": "/account",
+          "method": "GET",
+          "rel": "self",
+          "http_header": {
+            "Authorization": "Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJkYXRhIjp7ImlkIjoiMTE0MzYiLCJ0eXBlIjoiYWNjb3VudHMiLCJhdHRyaWJ1dGVzIjp7ImVtYWlsIjoiZ2xlbm4uZ29vZHJpY2hAZ21haWwuY29tIn19LCJzdWIiOiJhY2NvdW50IiwiZXhwIjoxNDM3MjM0OTM0LCJpc3MiOiJVbmlxdWUgVVNBIiwiaWF0IjoxNDM3MTQ4NTM0LCJqdGkiOiI3ZmJiYTgzOS1kMGRiLTQwODItOTBmZC1kNmMwM2YwN2NmMWMifQ.SuAAhWPz_7VfJ2iyQpPEHjAnj_aZ-0-gI4uptFucWWflQnrYJl3Z17vAjypiQB_6io85Nuw7VK0Kz2_VHc7VHZwAjxMpzSvigzpUS4HHjSsDil8iYocVEFlnJWERooCOCjSB9R150Pje1DKB8fNeePUGbkCDH6QSk2BsBzT07yT-7zrTJ7kRlsJ-3Kw2GDnvSbb_k2ecX_rkeMeaMj3FmF3PDBNlkM"
+          },
+          "title": "Info",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "data": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "id": {
+                    "$ref": "#/definitions/account/definitions/id"
+                  },
+                  "email": {
+                    "$ref": "#/definitions/account/definitions/email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "description": "Update an existing account.",
+          "href": "/account",
+          "method": "PUT",
+          "rel": "update",
+          "http_header": {
+            "Authorization": "Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJkYXRhIjp7ImlkIjoiMTE0MzYiLCJ0eXBlIjoiYWNjb3VudHMiLCJhdHRyaWJ1dGVzIjp7ImVtYWlsIjoiZ2xlbm4uZ29vZHJpY2hAZ21haWwuY29tIn19LCJzdWIiOiJhY2NvdW50IiwiZXhwIjoxNDM3MjM0OTM0LCJpc3MiOiJVbmlxdWUgVVNBIiwiaWF0IjoxNDM3MTQ4NTM0LCJqdGkiOiI3ZmJiYTgzOS1kMGRiLTQwODItOTBmZC1kNmMwM2YwN2NmMWMifQ.SuAAhWPz_7VfJ2iyQpPEHjAnj_aZ-0-gI4uptFucWWflQnrYJl3Z17vAjypiQB_6io85Nuw7VK0Kz2_VHc7VHZwAjxMpzSvigzpUS4HHjSsDil8iYocVEFlnJWERooCOCjSB9R150Pje1DKB8fNeePUGbkCDH6QSk2BsBzT07yT-7zrTJ7kRlsJ-3Kw2GDnvSbb_k2ecX_rkeMeaMj3FmF3PDBNlkM"
+          },
+          "schema": {
+            "properties": {
+              "account": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "email": {
+                    "$ref": "#/definitions/account/definitions/email"
+                  },
+                  "password": {
+                    "type": [
+                      "string"
+                    ],
+                    "description": "The password"
+                  }
+                }
+              }
+            },
+            "required": [
+              "account"
+            ],
+            "type": [
+              "object"
+            ]
+          },
+          "title": "Update",
+          "targetSchema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "token": {
+                "$ref": "#/definitions/account/definitions/token"
+              }
+            }
+          }
+        },
+        {
+          "description": "Update the password",
+          "href": "/account/password",
+          "method": "PUT",
+          "rel": "update",
+          "title": "Reset Password",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "account": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "password": {
+                    "type": [
+                      "string"
+                    ],
+                    "description": "The new password"
+                  },
+                  "reset_password_token": {
+                    "type": [
+                      "string"
+                    ],
+                    "description": "The reset password token"
+                  },
+                  "remember_me": {
+                    "type": [
+                      "boolean"
+                    ],
+                    "description": "True/false - generate refresh token (optional)"
+                  }
+                },
+                "required": [
+                  "password",
+                  "reset_password_token"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "description": "Request new passowrd",
+          "href": "/account/password",
+          "method": "POST",
+          "rel": "update",
+          "title": "Request Password",
+          "schema": {
+            "type": [
+              "object"
+            ],
+            "properties": {
+              "account": {
+                "type": [
+                  "object"
+                ],
+                "properties": {
+                  "email": {
+                    "$ref": "#/definitions/account/definitions/email"
+                  }
+                }
+              }
+            },
+            "required": [
+              "account"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/account/definitions/id"
+        },
+        "email": {
+          "$ref": "#/definitions/account/definitions/email"
+        }
+      }
+    }
+  },
+  "properties": {
+    "account": {
+      "$ref": "#/definitions/account"
+    }
+  },
+  "description": "Account API",
+  "id": "account-api",
+  "links": [
+    {
+      "href": "https://accounts.ourapi.com",
+      "rel": "self"
+    }
+  ],
+  "title": "Accounts"
+}

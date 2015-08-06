@@ -28,6 +28,6 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
 
-  gem 'prmd'
+  gem 'prmd', git: 'git@github.com:ruprict/prmd.git', branch: 'nested_requred_properties'
 end
 
