@@ -1,10 +1,9 @@
 {
-  "description": "Account API",
-    "id": "account-api",
+  "description": "Unique USA Authentication API",
+    "id": "uu-authentication",
     "links": [{
-      "href": "https://accounts.ourapi.com",
+      "href": "https://auth.app.esalerugs.com",
       "rel": "self"
     }],
-    "title": "Accounts"
+    "title": "Authentication API"
 }
-

@@ -6,7 +6,7 @@ The Account Schema
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **id** | *uuid* | unique identifier of account | `"01234567-89ab-cdef-0123-456789abcdef"` |
+| **id** | *uuid* | unique identifier of account | `"1dc3567e-afd5-4819-acd4-21d0ef677dcd"` |
 | **email** | *string* | unique email of account | `"fred@bedrockisp.com"` |
 
 ### Account Create
@@ -14,7 +14,7 @@ The Account Schema
 Create a new account.
 
 ```
-POST /account
+POST /accounts
 ```
 
 #### Required Parameters
@@ -23,19 +23,14 @@ POST /account
 | ------- | ------- | ------- | ------- |
 | **account:email** | *string* | unique email of account | `"fred@bedrockisp.com"` |
 | **account:password** | *string* | The password | `"example"` |
-
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
 | **account:remember_me** | *boolean* | True/false - generate refresh token (optional) | `true` |
+
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://accounts.ourapi.com/account \
+$ curl -n -X POST https://auth.app.esalerugs.com/accounts \
   -H "Content-Type: application/json" \
  \
   -d '{
@@ -74,19 +69,14 @@ POST /account/session
 | ------- | ------- | ------- | ------- |
 | **account:email** | *string* | unique email of account | `"fred@bedrockisp.com"` |
 | **account:password** | *string* | The password | `"example"` |
-
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
 | **account:remember_me** | *boolean* | True/false - generate refresh token (optional) | `true` |
+
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://accounts.ourapi.com/account/session \
+$ curl -n -X POST https://auth.app.esalerugs.com/account/session \
   -H "Content-Type: application/json" \
  \
   -d '{
@@ -124,19 +114,14 @@ PUT /account/session
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **account:refresh_token** | *string* | The refresh token | `"example"` |
-
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
 | **account:remember_me** | *boolean* | True/false - generate refresh token (optional) | `true` |
+
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X PUT https://accounts.ourapi.com/account/session \
+$ curl -n -X PUT https://auth.app.esalerugs.com/account/session \
   -H "Content-Type: application/json" \
  \
   -d '{
@@ -172,7 +157,7 @@ DELETE /account/session
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE https://accounts.ourapi.com/account/session \
+$ curl -n -X DELETE https://auth.app.esalerugs.com/account/session \
   -H "Content-Type: application/json" \
 ```
 
@@ -185,7 +170,7 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "id": "1dc3567e-afd5-4819-acd4-21d0ef677dcd",
   "email": "fred@bedrockisp.com"
 }
 ```
@@ -195,14 +180,14 @@ HTTP/1.1 200 OK
 Info for existing account.
 
 ```
-GET /account
+GET /accounts/{account_id}
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n https://accounts.ourapi.com/account \
+$ curl -n https://auth.app.esalerugs.com/accounts/$ACCOUNT_ID \
   -H "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJkYXRhIjp7ImlkIjoiMTE0MzYiLCJ0eXBlIjoiYWNjb3VudHMiLCJhdHRyaWJ1dGVzIjp7ImVtYWlsIjoiZ2xlbm4uZ29vZHJpY2hAZ21haWwuY29tIn19LCJzdWIiOiJhY2NvdW50IiwiZXhwIjoxNDM3MjM0OTM0LCJpc3MiOiJVbmlxdWUgVVNBIiwiaWF0IjoxNDM3MTQ4NTM0LCJqdGkiOiI3ZmJiYTgzOS1kMGRiLTQwODItOTBmZC1kNmMwM2YwN2NmMWMifQ.SuAAhWPz_7VfJ2iyQpPEHjAnj_aZ-0-gI4uptFucWWflQnrYJl3Z17vAjypiQB_6io85Nuw7VK0Kz2_VHc7VHZwAjxMpzSvigzpUS4HHjSsDil8iYocVEFlnJWERooCOCjSB9R150Pje1DKB8fNeePUGbkCDH6QSk2BsBzT07yT-7zrTJ7kRlsJ-3Kw2GDnvSbb_k2ecX_rkeMeaMj3FmF3PDBNlkM" \
 ```
 
@@ -216,7 +201,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "data": {
-    "id": "01234567-89ab-cdef-0123-456789abcdef",
+    "id": "1dc3567e-afd5-4819-acd4-21d0ef677dcd",
     "email": "fred@bedrockisp.com"
   }
 }
@@ -227,7 +212,7 @@ HTTP/1.1 200 OK
 Update an existing account.
 
 ```
-PUT /account
+PUT /accounts/{account_id}
 ```
 
 #### Required Parameters
@@ -242,7 +227,7 @@ PUT /account
 #### Curl Example
 
 ```bash
-$ curl -n -X PUT https://accounts.ourapi.com/account \
+$ curl -n -X PUT https://auth.app.esalerugs.com/accounts/$ACCOUNT_ID \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJkYXRhIjp7ImlkIjoiMTE0MzYiLCJ0eXBlIjoiYWNjb3VudHMiLCJhdHRyaWJ1dGVzIjp7ImVtYWlsIjoiZ2xlbm4uZ29vZHJpY2hAZ21haWwuY29tIn19LCJzdWIiOiJhY2NvdW50IiwiZXhwIjoxNDM3MjM0OTM0LCJpc3MiOiJVbmlxdWUgVVNBIiwiaWF0IjoxNDM3MTQ4NTM0LCJqdGkiOiI3ZmJiYTgzOS1kMGRiLTQwODItOTBmZC1kNmMwM2YwN2NmMWMifQ.SuAAhWPz_7VfJ2iyQpPEHjAnj_aZ-0-gI4uptFucWWflQnrYJl3Z17vAjypiQB_6io85Nuw7VK0Kz2_VHc7VHZwAjxMpzSvigzpUS4HHjSsDil8iYocVEFlnJWERooCOCjSB9R150Pje1DKB8fNeePUGbkCDH6QSk2BsBzT07yT-7zrTJ7kRlsJ-3Kw2GDnvSbb_k2ecX_rkeMeaMj3FmF3PDBNlkM" \
  \
@@ -281,19 +266,14 @@ PUT /account/password
 | ------- | ------- | ------- | ------- |
 | **account:password** | *string* | The new password | `"example"` |
 | **account:reset_password_token** | *string* | The reset password token | `"example"` |
-
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
 | **account:remember_me** | *boolean* | True/false - generate refresh token (optional) | `true` |
+
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X PUT https://accounts.ourapi.com/account/password \
+$ curl -n -X PUT https://auth.app.esalerugs.com/account/password \
   -H "Content-Type: application/json" \
  \
   -d '{
@@ -314,7 +294,7 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "id": "1dc3567e-afd5-4819-acd4-21d0ef677dcd",
   "email": "fred@bedrockisp.com"
 }
 ```
@@ -338,7 +318,7 @@ POST /account/password
 #### Curl Example
 
 ```bash
-$ curl -n -X POST https://accounts.ourapi.com/account/password \
+$ curl -n -X POST https://auth.app.esalerugs.com/account/password \
   -H "Content-Type: application/json" \
  \
   -d '{
@@ -357,7 +337,7 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "id": "1dc3567e-afd5-4819-acd4-21d0ef677dcd",
   "email": "fred@bedrockisp.com"
 }
 ```

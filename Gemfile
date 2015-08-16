@@ -6,12 +6,14 @@ gem 'rails', '4.2.3'
 gem 'rails-api'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'activeuuid'
+gem 'committee'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -27,7 +29,10 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rspec-rails'
+  gem "shoulda-matchers"
 
-  gem 'prmd', git: 'git@github.com:ruprict/prmd.git', branch: 'nested_requred_properties'
+  gem 'prmd', github: 'interagent/prmd'
+  gem "database_cleaner"
+  gem "faker"
 end
 

@@ -1,9 +1,8 @@
 GIT
-  remote: git@github.com:ruprict/prmd.git
-  revision: c22c49c59396041e5a7aa796e6e059702098310a
-  branch: nested_requred_properties
+  remote: git://github.com/interagent/prmd.git
+  revision: 31f708ad00453c19950f3240b33daf20963834fa
   specs:
-    prmd (0.7.4)
+    prmd (0.8.0)
       erubis (~> 2.7)
       json_schema (~> 0.3, >= 0.3.1)
 
@@ -45,14 +44,25 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    activeuuid (0.6.0)
+      activerecord (>= 3.1)
+      uuidtools
     arel (6.0.2)
+    bcrypt (3.1.10)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
     coderay (1.1.0)
     columnize (0.9.0)
+    committee (1.9.1)
+      json_schema (~> 0.6, >= 0.6.1)
+      multi_json (~> 1.10)
+      rack (~> 1.5)
+    database_cleaner (1.4.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    faker (1.4.3)
+      i18n (~> 0.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -66,6 +76,7 @@ GEM
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
+    multi_json (1.11.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pry (0.10.1)
@@ -129,6 +140,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.3.6)
     sprockets (3.2.0)
@@ -142,11 +155,17 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uuidtools (2.1.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeuuid
+  bcrypt (~> 3.1.7)
+  committee
+  database_cleaner
+  faker
   prmd!
   pry-byebug
   pry-rails
@@ -154,5 +173,6 @@ DEPENDENCIES
   rails-api
   rspec-rails
   sdoc (~> 0.4.0)
+  shoulda-matchers
   spring
   sqlite3

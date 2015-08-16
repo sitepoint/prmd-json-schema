@@ -25,5 +25,15 @@ module SpJsonSchemaRails
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    schema_file = "#{Rails.root}/schema/authentication-api.json"
+    if File.exists?(schema_file)
+      config.middleware.use Committee::Middleware::RequestValidation, schema: JSON.parse(File.read(schema_file)), strict: true
+      config.middleware.use Committee::Middleware::ResponseValidation, schema: JSON.parse(File.read(schema_file))
+    end
+
+    # Stub out the server based on the schema
+    config.middleware.use Committee::Middleware::Stub, schema: JSON.parse(File.read(schema_file))
+
+    config.active_record.schema_format = :sql
   end
 end

@@ -20,7 +20,8 @@
           "format": "uuid",
           "type": [
             "string"
-          ]
+          ],
+          "example": "1dc3567e-afd5-4819-acd4-21d0ef677dcd"
         },
         "email": {
           "description": "unique email of account",
@@ -62,7 +63,7 @@
       "links": [
         {
           "description": "Create a new account.",
-          "href": "/account",
+          "href": "/accounts",
           "method": "POST",
           "rel": "create",
           "schema": {
@@ -87,15 +88,14 @@
                     ],
                     "description": "True/false - generate refresh token (optional)"
                   }
-                },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                }
               }
             },
             "type": [
               "object"
+            ],
+            "required": [
+              "account"
             ]
           },
           "title": "Create",
@@ -137,15 +137,14 @@
                     ],
                     "description": "True/false - generate refresh token (optional)"
                   }
-                },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                }
               }
             },
             "type": [
               "object"
+            ],
+            "required": [
+              "account"
             ]
           },
           "targetSchema": {
@@ -188,12 +187,12 @@
                     ],
                     "description": "True/false - generate refresh token (optional)"
                   }
-                },
-                "required": [
-                  "refresh_token"
-                ]
+                }
               }
-            }
+            },
+            "required": [
+              "account"
+            ]
           },
           "targetSchema": {
             "type": [
@@ -215,7 +214,7 @@
         },
         {
           "description": "Info for existing account.",
-          "href": "/account",
+          "href": "/accounts/{(%23%2Fdefinitions%2Faccount%2Fdefinitions%2Fidentity)}",
           "method": "GET",
           "rel": "self",
           "http_header": {
@@ -240,12 +239,15 @@
                   }
                 }
               }
-            }
+            },
+            "required": [
+              "data"
+            ]
           }
         },
         {
           "description": "Update an existing account.",
-          "href": "/account",
+          "href": "/accounts/{(%23%2Fdefinitions%2Faccount%2Fdefinitions%2Fidentity)}",
           "method": "PUT",
           "rel": "update",
           "http_header": {
@@ -323,13 +325,12 @@
                     ],
                     "description": "True/false - generate refresh token (optional)"
                   }
-                },
-                "required": [
-                  "password",
-                  "reset_password_token"
-                ]
+                }
               }
-            }
+            },
+            "required": [
+              "account"
+            ]
           }
         },
         {
@@ -375,13 +376,13 @@
       "$ref": "#/definitions/account"
     }
   },
-  "description": "Account API",
-  "id": "account-api",
+  "description": "Unique USA Authentication API",
+  "id": "uu-authentication",
   "links": [
     {
-      "href": "https://accounts.ourapi.com",
+      "href": "https://auth.app.esalerugs.com",
       "rel": "self"
     }
   ],
-  "title": "Accounts"
+  "title": "Authentication API"
 }

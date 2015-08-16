@@ -14,7 +14,9 @@
         "format": "uuid",
         "type": [
           "string"
-          ]
+          ],
+        "example": "1dc3567e-afd5-4819-acd4-21d0ef677dcd"
+        
       },
       "email": {
         "description": "unique email of account",
@@ -36,25 +38,25 @@
         }
         ]
       },
-      "created_at": {
-        "description": "when account was created",
-        "format": "date-time",
-        "type": [
-          "string"
-          ]
-      },
-      "updated_at": {
-        "description": "when account was updated",
-        "format": "date-time",
-        "type": [
-          "string"
-          ]
-      }
+        "created_at": {
+          "description": "when account was created",
+          "format": "date-time",
+          "type": [
+            "string"
+            ]
+        },
+        "updated_at": {
+          "description": "when account was updated",
+          "format": "date-time",
+          "type": [
+            "string"
+            ]
+        }
     },
     "links": [
     {
       "description": "Create a new account.",
-      "href": "/account",
+      "href": "/accounts",
       "method": "POST",
       "rel": "create",
       "schema": {
@@ -71,11 +73,12 @@
                 "type": "boolean",
                 "description": "True/false - generate refresh token (optional)"
               }
-            },
-            "required" : [ "email", "password" ]
+
+            }
           }
         },
-        "type": [ "object" ]
+        "type": [ "object" ],
+        "required" : [ "account" ]
       },
       "title": "Create",
       "targetSchema": {
@@ -104,13 +107,13 @@
                 "type": "boolean",
                 "description": "True/false - generate refresh token (optional)"
               }
-            },
-            "required" : [ "email", "password"]
+            }
           }
         },
         "type": [
           "object"
-          ]
+          ],
+        "required" : [ "account"]
       },
       "targetSchema": {
         "type": "object",
@@ -140,10 +143,10 @@
                 "type": "boolean",
                 "description": "True/false - generate refresh token (optional)"
               }
-            },
-            "required": ["refresh_token"]
+            }
           }
-        }
+        },
+        "required" : ["account"]
       },
       "targetSchema": {
         "type": "object",
@@ -161,7 +164,7 @@
     },
     {
       "description": "Info for existing account.",
-      "href": "/account",
+      "href": "/accounts/{(%2Fschemata%2Faccount%23%2Fdefinitions%2Fidentity)}",
       "method": "GET",
       "rel": "self",
       "http_header": {
@@ -178,12 +181,13 @@
               "email": { "$ref" : "/schemata/account#/definitions/email" }
             }
           }
-        }
+        },
+        "required": ["data"]
       }
     },
     {
       "description": "Update an existing account.",
-      "href": "/account",
+      "href": "/accounts/{(%2Fschemata%2Faccount%23%2Fdefinitions%2Fidentity)}",
       "method": "PUT",
       "rel": "update",
       "http_header": {
@@ -239,10 +243,10 @@
                 "type": "boolean",
                 "description": "True/false - generate refresh token (optional)"
               }
-            },
-            "required" : ["password", "reset_password_token"]
+            }
           }
-        }
+        },
+        "required" : ["account"]
       }
     },
     {
